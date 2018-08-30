@@ -1,17 +1,17 @@
-svg-center
+svg-centre
 =========
 
 Lets shrink our svg just to the elements being shown within it.
 
 ```
-center = require('svg-center')
+centre = require('svg-centre')
 
 
 // shrink a single svg
-center.shrink(document.getElementById('svg1'))
+centre.shrink(document.getElementById('svg1'))
 
 // or 
 
 // shrink all svgs
-center.shrinkall()
+centre.shrinkall()
 ```
