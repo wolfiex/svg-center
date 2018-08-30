@@ -35,7 +35,7 @@ module.exports = {
   },
 
 
-  shrinkall: function(html) {
+  shrinkall: function() {
         [...document.getElementsByTagName('svg')].forEach(s=>shrink(s))
   }
 };
