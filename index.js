@@ -19,31 +19,33 @@
        [...s.children].forEach(c =>{
        var val = c.getBoundingClientRect();
        // filter points not on image
-       btop.push(val.top);
-       bbottom.push(val.bottom);
-       bleft.push(val.left);
-       bright.push(val.right);
+       if (isFinite(val.top)){btop.push(val.top)};
+       if (isFinite(val.bottom)){bbottom.push(val.bottom)};
+       if (isFinite(val.left)){bleft.push(val.left)};
+       if (isFinite(val.right)){bright.push(val.right)};
        })
-
+console.log(bleft)
 
        btop = Math.min(...btop)/sheight;
        bbottom = Math.max(...bbottom)/sheight;
        bleft = Math.min(...bleft)/swidth
        bright = Math.max(...bright)/swidth;
 
-       //if (s.origin === undefined){s.origin = {x:s.clientWidth,y:s.clientHeight}}
-
        var by= Math.abs(btop-bbottom)*sheight;
        var bx= Math.abs(bleft-bright)*swidth ;
               //btop = (btop <0)?0:btop;
               //bleft = (bleft <0)?0:bleft;
-console.log(bleft,bright,bbottom,btop,bx,by)
+console.log(bleft,bright,bbottom,btop,bx,by,'cw',swidth,sheight)
 
        s.setAttribute('preserveAspectRatio',"none");
        scale += .5e-4
+       console.log(''+ (bleft)*scale+' '+(btop)*scale+
+        ' '+bx+' '+by)
+
+
        s.setAttribute('viewBox',''+
 
-         (bleft)*scale+' '+(btop)*scale+
+         (bleft)*scale*swidth+' '+(btop)*scale*sheight+
          ' '+bx+' '+by);
        scale += .5e-4
        s.setAttribute('preserveAspectRatio',"xMinYMin meet");
