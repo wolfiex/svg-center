@@ -6,7 +6,7 @@
  * @return {String}
  */
 
- function shrink(s,scale=1,loop=0) {
+ function shrink(s,scale=1,square=false) {
        var btop =[],bbottom =[],bleft=[],bright=[];
        //var s = document.getElementsByTagName('svg')[3];
        var swidth = s.clientWidth;
@@ -51,6 +51,10 @@ console.log(bleft,bright,bbottom,btop,bx,by)
 
          s.style.width = bx*scale;
          s.style.height = by*scale;
+       if (square){
+         s.style.width = square;
+         s.style.height = square;
+       }
 
     /*if (loop >0 ){
       loop += 1
@@ -62,8 +66,8 @@ console.log(bleft,bright,bbottom,btop,bx,by)
  }
 module.exports = {
   shrink: shrink,
-  shrinkall: function(scale =1 ) {
-        [...document.getElementsByTagName('svg')].forEach(s=>shrink(s,scale = scale))
+  shrinkall: function(scale =1, square=false  ) {
+        [...document.getElementsByTagName('svg')].forEach(s=>shrink(s,scale = scale,square = square))
         console.log('done')
   }
 };

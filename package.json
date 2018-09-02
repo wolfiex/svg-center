@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/wolfiex/svg-centre/issues"
   },
-  "homepage": "https://github.com/wolfiex/svg-centre#readme"
+  "homepage": "https://github.com/wolfiex/svg-centre#readme",
+  "dependencies": {
+    "svg-center": "^1.0.0"
+  }
 }
