@@ -21,3 +21,4 @@ centre.shrinkall(square='30vw')
 
 
 ```
+![alt text](eg.png "Title")
