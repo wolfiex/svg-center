@@ -1,6 +1,6 @@
 {
   "name": "svg-centre",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Resize and centre an svg element to its contents. Eliminates whitespace, and enables correct rescaling regarding width and height (provided ratio is constant)",
   "main": "index.js",
   "scripts": {
