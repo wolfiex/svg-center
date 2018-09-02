@@ -6,12 +6,18 @@
  * @return {String}
  */
 
- function shrink(s) {
+ function shrink(s,scale=1,loop=0) {
        var btop =[],bbottom =[],bleft=[],bright=[];
        //var s = document.getElementsByTagName('svg')[3];
+       var swidth = s.clientWidth;
+       var sheight = s.clientHeight;
+
+
+       s.removeAttribute('viewBox');
+
+
        [...s.children].forEach(c =>{
        var val = c.getBoundingClientRect();
-
        // filter points not on image
        btop.push(val.top);
        bbottom.push(val.bottom);
@@ -19,31 +25,45 @@
        bright.push(val.right);
        })
 
-       btop = Math.min(...btop);
-       bbottom = Math.max(...bbottom);
-       bleft = Math.min(...bleft);
-       bright = Math.max(...bright);
 
+       btop = Math.min(...btop)/sheight;
+       bbottom = Math.max(...bbottom)/sheight;
+       bleft = Math.min(...bleft)/swidth
+       bright = Math.max(...bright)/swidth;
 
-       var bx= Math.abs(btop-bbottom);
-       var by= Math.abs(bleft-bright);
+       //if (s.origin === undefined){s.origin = {x:s.clientWidth,y:s.clientHeight}}
 
-
+       var by= Math.abs(btop-bbottom)*sheight;
+       var bx= Math.abs(bleft-bright)*swidth ;
               //btop = (btop <0)?0:btop;
               //bleft = (bleft <0)?0:bleft;
 console.log(bleft,bright,bbottom,btop,bx,by)
+
        s.setAttribute('preserveAspectRatio',"none");
-       s.style.width = bx;
-       s.style.height = by;
-       s.setAttribute('viewBox',''+bleft/s.clientWidth+' '+btop/s.clientHeight+ ' '+bx+' '+by);
+       scale += .5e-4
+       s.setAttribute('viewBox',''+
+
+         (bleft)*scale+' '+(btop)*scale+
+         ' '+bx+' '+by);
+       scale += .5e-4
        s.setAttribute('preserveAspectRatio',"xMinYMin meet");
 
+
+         s.style.width = bx*scale;
+         s.style.height = by*scale;
+
+    /*if (loop >0 ){
+      loop += 1
+      shrink(s,scale=1,loop=loop)
+    }  else{
        return s
+    }*/
+    return s
  }
 module.exports = {
   shrink: shrink,
-  shrinkall: function() {
-        [...document.getElementsByTagName('svg')].forEach(s=>shrink(s))
+  shrinkall: function(scale =1 ) {
+        [...document.getElementsByTagName('svg')].forEach(s=>shrink(s,scale = scale))
         console.log('done')
   }
 };
